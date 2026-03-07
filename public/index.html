@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vivek chat app</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h1>Chatting App By Vivek</h1>
+    <div class="chat-container">
+      <ul id="messages"></ul>
+    </div>
+    <form id="myform">
+      <!-- <label for="input">Message</label> -->
+      <input type="text" placeholder="Messages" id="input" autocomplete="off" />
+      <button id="sendbtn">Send</button>
+      <button id="toggle-btn">Disconnect</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      const input = document.querySelector("#input");
+      const btn = document.querySelector("#sendbtn");
+      const toggleBtn = document.querySelector("#toggle-btn");
+
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        socket.emit("message", input.value.trim());
+        input.value = "";
+      });
+
+      socket.on("message", (msg, senderId) => {
+        const li = document.createElement("li");
+        li.innerText = msg;
+        // console.log(senderId);
+
+        if (senderId === socket.id) {
+          li.classList.add("my-message");
+        } else {
+          li.classList.add("other-message");
+        }
+        document.querySelector("#messages").appendChild(li);
+
+        // ! auto scroll
+        const chatContainer = document.querySelector('.chat-container')
+        chatContainer.scrollTop = chatContainer.scrollHeight
+      });
+
+      toggleBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (socket.connected) {
+          toggleBtn.innerHTML = "Connect";
+          socket.disconnect();
+        } else {
+          toggleBtn.innerHTML = "Disconnect";
+          socket.connect();
+        }
+      });
+    </script>
+  </body>
+</html>
