@@ -1,4 +1,5 @@
 const express = require("express")
+const { timeStamp } = require("node:console")
 const {createServer} = require('node:http')
 const {Server} =require('socket.io')
 
@@ -18,10 +19,21 @@ io.on('connection',(Socket)=>{
     Socket.on("chat-message",(data)=>{
         // console.log(data.message);
         // console.log(data.image);
-        io.emit("receive-chat",{
+        const messageData={
             message:data.message,
-            image:data.image
-        },Socket.id)
+            image:data.image,
+            timeStamp: new Date().toLocaleTimeString('en-In',{
+                timeZone: 'Asia/Kolkata',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            })
+
+        }
+
+        io.emit("receive-chat",messageData,Socket.id)
+        // console.log(messageData.timeStamp);
+        
         
     })
     

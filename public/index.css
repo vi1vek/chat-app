@@ -12,6 +12,25 @@ body{
     height: 100vh;
 }
 
+.time{
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    color: #666;
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.time-img{
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    color: #666;
+    align-self: flex-end;
+    /* margin-left: 105px; */
+    
+}
+
 h1{
     display: flex;
     align-items: center;
@@ -78,6 +97,8 @@ button:hover{
 }
 
 #messages li{
+    display: flex;
+    flex-direction: column;
     background-color: white;
     padding: 10px 14px;
     border-radius: 8px;

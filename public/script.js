@@ -23,7 +23,8 @@
     if(data.message && data.image){
     const li = document.createElement("li");
     const lil = document.createElement("li");
-    li.innerText = data.message;
+    li.innerHTML = `${data.message}<small class='time'>${data.timeStamp}</small>`;
+    // console.log(data.message);
     
     if(data.image){
         const blob = new Blob([data.image])
@@ -31,7 +32,10 @@
         const img = document.createElement('img')
         img.src=url;
         img.style.width='150px'
+        lil.innerHTML = `<small class='time-img'>${data.timeStamp}</small>`;
         lil.appendChild(img)
+        
+        
         // console.log(lil);
     }
     // console.log(senderId);
@@ -53,7 +57,7 @@
     }else if(data.message){
     const li = document.createElement("li");
     
-    li.innerText = data.message;
+    li.innerHTML = `${data.message}<small class='time'>${data.timeStamp}</small>`;
 
     if (senderId === socket.id) {
         li.classList.add("my-message");
@@ -78,6 +82,7 @@
         const img = document.createElement('img')
         img.src=url;
         img.style.width='150px'
+        li.innerHTML = `<small class='time-img'>${data.timeStamp}</small>`;
         li.appendChild(img)
         // console.log(li);
     }
