@@ -19,7 +19,7 @@ h1{
     margin: 0;
     padding: 12px ;
     font-size: 1.2rem;
-    text-align: center;
+    /* text-align: center; */
     z-index: 10;
 }
 
@@ -101,6 +101,39 @@ button:hover{
     border-top: 1px solid #ddd;
     
     
+}
+
+.file{
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+.file-input label {
+   
+  border: none;
+  padding: 1px 4px;
+  transition: 0.3s;
+  display: block;
+  position: relative;
+  border-radius: 5px;
+  background-color: #128c7e;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .2s ease-out;
+}
+
+.file-input label:hover{
+    background-color: #075e54;
+}
+
+.shareImage{
+    width: 30px;
+    border: none;
+    /* padding: 1px 4px; */
+    border-radius: 5px;
 }
 
 @media (max-width:460px){
